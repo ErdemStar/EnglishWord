@@ -20,7 +20,7 @@ def KelimeEkle(request):
         eword = request.POST.get("eword")
         tword = request.POST.get("tword")
         tur   = request.POST.get("tur")
-        cumle = request.POST.get("umle")
+        cumle = request.POST.get("cumle")
 
         if eword and tword and tur and cumle != "":
             query = "select * from Manage_Words"
@@ -28,10 +28,9 @@ def KelimeEkle(request):
             var = Words.objects.raw(query)
 
             if eword and tword and tur in var:
-                return render(request, "KelimeEkle.html", {"error":"Eklediğin fiilin aynı anlamadında aynı "
-                                                                   "türünde bir kayıt mevcut"})
+                return render(request, "KelimeEkle.html", {"Er":"alert('Böyle bir kayıt vardır.')"})
             else:
-                New = Words(englishWord="eee", turkishWord="Ahmet",type="Veli",sentence= "Cemal")
+                New = Words(englishWord=eword, turkishWord=tword,type=tur,sentence= cumle)
                 New.save()
                 return render(request, "KelimeEkle.html", {})
 

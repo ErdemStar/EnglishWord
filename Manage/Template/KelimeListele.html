@@ -16,37 +16,36 @@
       {% include 'Navbar.html' %}
 
 
-      <div class="" style="height: 500px;background-color: whitesmoke;border-radius: 3px">
+      <div class="" style="height: 500px;background-color: white;border-radius: 3px">
 
           <div class="row" style="padding-top: 5%">
-              <div class="col-md-1"></div>
-              <div class="col-md-10">
+              <div class="col-md-12">
 
-                  <table class="table table-striped">
-                   <tr>
-                        <th>No<th/>
-                        <th>İngilizce <th/>
-                        <th>Türkçe<th/>
-                        <th>Tür<th/>
-                        <th>Cümle<th/>
-                   </tr>
-              {% for i in Arr %}
-                   <tr>
-                        <td>{{123}}</td>
-                        <td>{{i.Eword}}</td>
-                        <td>{{i.TMeaning}}</td>
-                        <td>{{i.Type}}</td>
-                        <td>{{i.Sentence}}</td>
-                   </tr>
-              {% endfor%}
+                   <table class="table table-hover" style="width:100%">
+                      <thead>
+                       <tr>
+                        <th>No</th>
+                        <th>İngilizce</th>
+                        <th>Türkçe</th>
+                        <th>Tür</th>
+                        <th>Cümle</th>
+                       </tr>
+                      </thead>
 
-
-
-                  </table>
-
+                      <tbody>
+                   {% for i in Arr %}
+                      <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.englishWord}}</td>
+                        <td>{{i.turkishWord}}</td>
+                        <td>{{i.type}}</td>
+                        <td>{{i.sentence}}</td>
+                      </tr>
+                   {% endfor %}
+                     </tbody>
+                    </table>
 
               </div>
-              <div class="col-md-1"></div>
           </div>
 
 
