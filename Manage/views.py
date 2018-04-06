@@ -22,21 +22,15 @@ def KelimeEkle(request):
         tur   = request.POST.get("tur")
         cumle = request.POST.get("cumle")
 
-        if eword and tword and tur and cumle != "":
-            query = "select * from Manage_Words"
-
-            var = Words.objects.raw(query)
-
-            if eword and tword and tur in var:
-                return render(request, "KelimeEkle.html", {"Er":"alert('Böyle bir kayıt vardır.')"})
-            else:
-                New = Words(englishWord=eword, turkishWord=tword,type=tur,sentence= cumle)
-                New.save()
-                return render(request, "KelimeEkle.html", {})
+        if Words.objects.filter(englishWord=eword,turkishWord=tword,type=tur) == "QuerySet[]":
+            return render(request, "KelimeEkle.html", {"Err":"alert('Boyle bir kayıt vardır')"})
+        else:
+            New = Words(englishWord=eword, turkishWord=tword,type=tur,sentence= cumle)
+            New.save()
+            return render(request, "KelimeEkle.html", {})
 
 
 def KelimeListele(request):
     if request.method == "GET":
-        query = "select * from Manage_Words"
-        Arr = Words.objects.raw(query)
+        Arr = Words.objects.order_by("englishWord")
         return render(request,"KelimeListele.html", {"Arr":Arr})
