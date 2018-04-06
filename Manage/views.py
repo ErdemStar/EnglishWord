@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.http import *
 from django.shortcuts import render
+from models import Words
 
 # Create your views here.
 
@@ -30,7 +31,10 @@ def KelimeEkle(request):
                 return render(request, "KelimeEkle.html", {"error":"Eklediğin fiilin aynı anlamadında aynı "
                                                                    "türünde bir kayıt mevcut"})
             else:
-                New = Words(Eword="eee", TMeaning="Ahmet",Type="Veli",Sentence= "Cemal")
+                New = Words(englishWord="eee", turkishWord="Ahmet",type="Veli",sentence= "Cemal")
+                New.save()
+                return render(request, "KelimeEkle.html", {})
+
 
 def KelimeListele(request):
     if request.method == "GET":
