@@ -25,6 +25,7 @@ def KelimeEkle(request):
         tword = request.POST.get("tword")
         tur   = request.POST.get("tur")
         cumle = request.POST.get("cumle")
+        state=True
 
         #if Words.objects.filter(englishWord=eword,turkishWord=tword,type=tur) == "QuerySet[]":
         #    return render(request, "KelimeEkle.html", {"Err":"alert('Boyle bir kayıt vardır')"})
@@ -32,12 +33,13 @@ def KelimeEkle(request):
             getir = Words.objects.all()
             for i in getir:
                 if i.englishWord == eword and i.turkishWord == tword and i.type==tur:
-                    return render(request, "KelimeEkle.html", {"Err": "alert('Boyle bir kayıt vardır')"})
-
-                else:
-                    New = Words(englishWord=eword, turkishWord=tword,type=tur,sentence= cumle)
-                    New.save()
-                    return render(request, "KelimeEkle.html", {"Err": "alert('Kayıt Eklendi')"})
+                    state=False
+                    alert= "alert('Boyle bir kayıt vardır')"
+            if state:
+                New = Words(englishWord=eword, turkishWord=tword,type=tur,sentence= cumle)
+                New.save()
+                alert ="alert('Kayıt Eklendi')"
+        return render(request, "KelimeEkle.html",{"Err":alert})
 
 
 def KelimeListele(request):
