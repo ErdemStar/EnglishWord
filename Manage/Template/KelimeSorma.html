@@ -20,32 +20,40 @@
           <div class="row" style="padding-top: 5%">
               <div class="col-md-3"></div>
               <div class="col-md-6">
+
+                   <!-- Score sonuc -->
+                  {% if request.method == "POST" %}
+                   <div class="alert alert-success" role="alert">
+                          <a href="#" class="alert-link">Cevaplandığınız için çok teşekkürler.
+                              Bu testen elde ettiğiniz sonuç {{score}}.</a>
+                    </div>
+                   {% endif %}
                    <form method="post" action="KelimeSorma">
 
                       {% csrf_token %}
 
                        <div class="input-group">
-                          <span class="input-group-addon" id="basic-addon1"></span>
-                          <input type="text" class="form-control" placeholder="{{k1.englishWord}}" aria-describedby="basic-addon1" name="t1">
+                          <span class="input-group-addon" id="basic-addon1">{{arr.0.englishWord}} > {{arr.0.type}} </span>
+                          <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" name="t1">
                        </div>
 
                        <div class="input-group" style="padding-top: 2%">
-                          <span class="input-group-addon" id="basic-addon2"></span>
+                          <span class="input-group-addon" id="basic-addon2">{{arr.1.englishWord}} > {{arr.1.type}}</span>
                           <input type="text" class="form-control" placeholder="{{k2.englishWord}}" aria-describedby="basic-addon2" name="t2">
                        </div>
 
                        <div class="input-group" style="padding-top: 2%">
-                          <span class="input-group-addon" id="basic-addon3"></span>
+                          <span class="input-group-addon" id="basic-addon3">{{arr.2.englishWord}} > {{arr.2.type}}</span>
                           <input type="text" class="form-control" placeholder="{{k3.englishWord}}" aria-describedby="basic-addon3" name="t3">
                        </div>
 
                        <div class="input-group" style="padding-top: 2%">
-                          <span class="input-group-addon" id="basic-addon4"></span>
+                          <span class="input-group-addon" id="basic-addon4">{{arr.3.englishWord}} > {{arr.3.type}}</span>
                           <input type="text" class="form-control" placeholder="{{k4.englishWord}}" aria-describedby="basic-addon4" name="t4">
                        </div>
 
                         <div class="input-group" style="padding-top: 2%">
-                          <span class="input-group-addon" id="basic-addon5"></span>
+                          <span class="input-group-addon" id="basic-addon5">{{arr.4.englishWord}} > {{arr.4.type}}</span>
                           <input type="text" class="form-control" placeholder="{{k5.englishWord}}" aria-describedby="basic-addon4" name="t5">
                        </div>
 
@@ -60,11 +68,7 @@
 
       </div>
 
-      <div class="error">
-          {% if request.method == "POST" %}
-          <p>{{ score }}</p>
-          {% endif %}
-      </div>
+
 
   </div> <!-- /container -->
 
