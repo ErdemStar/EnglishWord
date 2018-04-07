@@ -40,3 +40,7 @@ def KelimeListele(request):
     if request.method == "GET":
         Arr = Words.objects.order_by("englishWord")
         return render(request,"KelimeListele.html", {"Arr":Arr})
+
+
+def KelimeSorma(request):
+    return render(request,"KelimeSorma.html",{})
