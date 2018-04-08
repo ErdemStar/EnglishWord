@@ -6,8 +6,15 @@ from models import Words
 import random
 
 #-------------------
-allWord = []
+allWord   = []
 
+
+def GetLast5Word():
+    Last5 = Words.objects.all()
+    Last5Word=[]
+    for i in Last5[len(Last5)-5:]:
+        Last5Word.append(i)
+    return Last5Word
 #-------------------
 
 
@@ -19,7 +26,7 @@ def Index(request):
 
 def KelimeEkle(request):
     if request.method == "GET":
-        return render(request,"KelimeEkle.html", {})
+        return render(request,"KelimeEkle.html", {"Last5Word":GetLast5Word()})
     elif request.method == "POST":
         eword = request.POST.get("eword")
         tword = request.POST.get("tword")
@@ -39,7 +46,7 @@ def KelimeEkle(request):
                 New = Words(englishWord=eword, turkishWord=tword,type=tur,sentence= cumle)
                 New.save()
                 alert ="alert('Kayıt Eklendi')"
-        return render(request, "KelimeEkle.html",{"Err":alert})
+        return render(request, "KelimeEkle.html",{"Err":alert , "Last5Word":GetLast5Word()})
 
 
 def KelimeListele(request):

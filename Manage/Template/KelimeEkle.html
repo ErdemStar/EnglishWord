@@ -15,9 +15,41 @@
 
       {% include 'Navbar.html' %}
 
-      <div class="" style="height: 500px;background-color: whitesmoke;border-radius: 3px">
+      <div class="" style="background-color: whitesmoke;border-radius: 3px;padding-bottom: 3%">
 
-          <div class="row" style="padding-top: 5%">
+          <!-- Son eklenen 5 kelime-->
+          <div class="row" style="padding-top: 3%">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                   <h1 style="text-align: center"><b>Son eklenen 5 kelime</b></h1>
+
+                    <table class="table table-hover" style="width:100%">
+                      <thead>
+                       <tr>
+                        <th>İngilizce</th>
+                        <th>Türkçe</th>
+                        <th>Tür</th>
+                        <th>Cümle</th>
+                       </tr>
+                      </thead>
+
+                      <tbody>
+                   {% for i in Last5Word %}
+                      <tr>
+                        <td>{{i.englishWord}}</td>
+                        <td>{{i.turkishWord}}</td>
+                        <td>{{i.type}}</td>
+                        <td>{{i.sentence}}</td>
+                      </tr>
+                   {% endfor %}
+                     </tbody>
+                    </table>
+              </div>
+              <div class="col-md-2"></div>
+          </div>
+
+          <!-- Kelime Ekle-->
+          <div class="row" style="padding-top: 1%">
               <div class="col-md-1"></div>
               <div class="col-md-10">
                    <form method="post" action="KelimeEkle">
