@@ -9,13 +9,13 @@ import random
 allWord   = []
 
 
+#Kelime ekle kısmıda son5 kelimeyi getirmek için kullanılıyot
 def GetLast5Word():
     Last5 = Words.objects.all()
     Last5Word=[]
     for i in Last5[len(Last5)-5:]:
         Last5Word.append(i)
     return Last5Word
-#-------------------
 
 
 def Yonlendir(request):
@@ -62,25 +62,29 @@ def KelimeSorma(request):
         for i in getir:
             allWord.append(i)
         random.shuffle(allWord)
-        return render(request,"KelimeSorma.html",{"arr":allWord[:5]})
+        return render(request,"KelimeSorma.html",{"arr":allWord[:10]})
     elif request.method == "POST":
         global allWord
         score = 0
-        t1 = request.POST["t1"].encode('utf-8')
-        t2 = request.POST["t2"].encode("utf-8")
-        t3 = request.POST["t3"].encode("utf-8")
-        t4 = request.POST["t4"].encode("utf-8")
-        t5 = request.POST["t5"].encode("utf-8")
-        for i in allWord[:5]:
-            if t1 in i.turkishWord.encode('utf-8'):
-                score+=20
-            elif t2 in i.turkishWord.encode('utf-8'):
-                score+=20
-            elif t3 in i.turkishWord.encode('utf-8'):
-                score += 20
-            elif t4 in i.turkishWord.encode('utf-8'):
-                score += 20
-            elif t5 in i.turkishWord.encode('utf-8'):
-                score += 20
+        answer = []
+        last10 = allWord[:10]
+        answer.append(request.POST["t1"].encode('utf-8'))
+        answer.append(request.POST["t2"].encode("utf-8"))
+        answer.append(request.POST["t3"].encode("utf-8"))
+        answer.append(request.POST["t4"].encode("utf-8"))
+        answer.append(request.POST["t5"].encode("utf-8"))
+        answer.append(request.POST["t6"].encode("utf-8"))
+        answer.append(request.POST["t7"].encode("utf-8"))
+        answer.append(request.POST["t8"].encode("utf-8"))
+        answer.append(request.POST["t9"].encode("utf-8"))
+        answer.append(request.POST["t10"].encode("utf-8"))
 
-        return render(request, "KelimeSorma.html", {"score": score,"arr":allWord[:5]})
+
+        for i in range(0,10):
+
+            if answer[i] != "" and answer[i] in last10[i].turkishWord.encode("utf-8"):
+                score+=10
+
+
+
+        return render(request, "KelimeSorma.html", {"score": score,"arr":last10})
